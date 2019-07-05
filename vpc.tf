@@ -16,7 +16,7 @@ resource "aws_subnet" "subnet_internal" {
 }
 
 # internet gateway
-resource "aws_nat_gateway" "nat_gatewat" {
+resource "aws_nat_gateway" "nat_gateway" {
   allocation_id = "${aws_eip.nat_eip.id}"
   subnet_id     = "${aws_subnet.subnet_dmz.id}"
   depends_on = ["aws_eip.nat_eip"]
