@@ -16,14 +16,14 @@ resource "aws_subnet" "subnet_internal" {
 }
 
 # internet gateway
-resource "aws_nat_gateway" "nat_gateway" {
-  allocation_id = "${aws_eip.nat_eip.id}"
-  subnet_id     = "${aws_subnet.subnet_dmz.id}"
-  depends_on = ["aws_eip.nat_eip"]
+resource "aws_internet_gateway" "internet_gateway" {
+  vpc_id = "${aws_vpc.main_vpc.id}"
+}
 
-  tags = {
-    Name = "gw NAT"
-  }
+resource "aws_nat_gateway" "aws_nat_gateway" {
+  allocation_id = "${aws_eip.nat_eip.allocation_id}"
+  subnet_id = "${aws_subnet.subnet_dmz}"
+  depends_on = ["aws_internet_gateway.internet_gateway", "aws_internet_gateway.internet_gateway"]
 }
 
 # EIP
