@@ -22,7 +22,7 @@ resource "aws_internet_gateway" "internet_gateway" {
 
 resource "aws_nat_gateway" "aws_nat_gateway" {
   allocation_id = "${aws_eip.nat_eip.allocation_id}"
-  subnet_id = "${aws_subnet.subnet_dmz}"
+  subnet_id = "${aws_subnet.subnet_dmz.id}"
   depends_on = ["aws_internet_gateway.internet_gateway", "aws_internet_gateway.internet_gateway"]
 }
 
