@@ -1,0 +1,34 @@
+version: 2.1
+jobs:
+  deployment:
+    docker:
+      - image: python:3.11-rc
+    environment:
+      - ANSIBLE_HOST_KEY_CHECKING: False
+    working_directory: ~
+    steps:
+      - checkout
+      - run:
+          name: Install terraform
+          environment:
+            - TERRAFORM_VERSION: 1.3.2
+          command: |
+            pip install requests
+            chmod +x ops/*sh
+            ops/install_terraform.sh ${TERRAFORM_VERSION}
+      - run:
+          name: Create provider.tf
+          command: |
+            rm provider.tf
+            echo "${PROVIDER}" | base64 -d > provider.tf
+      - run:
+          name: deploy IaC with terraform to AWS
+          command: |
+            ops/terraform init
+            ops/terraform plan
+            ops/terraform apply -auto-approve
+workflows:
+  version: 2.1
+  init_and_deploy:
+    jobs:
+      - deployment
