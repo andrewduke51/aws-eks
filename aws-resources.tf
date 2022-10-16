@@ -13,14 +13,12 @@ module "vpc" {
   subnet_internal = var.subnet_internal
   subnet_vpc      = var.subnet_vpc
 }
-
 ## KMS ##
 resource "aws_kms_key" "general_bucket_key" {
   description             = "This key is used to encrypt bucket objects"
   deletion_window_in_days = 10
   enable_key_rotation     = true
 }
-
 resource "aws_kms_alias" "key-alias" {
   name          = "alias/general-bucket-key"
   target_key_id = aws_kms_key.general_bucket_key.key_id
@@ -40,7 +38,6 @@ resource "aws_s3_bucket" "general" {
     }
   }
 }
-
 resource "aws_s3_bucket_public_access_block" "block" {
   bucket = aws_s3_bucket.general.id
 
