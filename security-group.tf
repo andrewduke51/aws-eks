@@ -1,6 +1,6 @@
 resource "aws_security_group" "allow_tls" {
-  name        = "allow_from_home"
-  description = "Allow inbound traffic from Home"
+  name        = "allow_from_origin"
+  description = "Allow inbound traffic origin"
   vpc_id      = module.vpc.vpc_id
 
   ingress {

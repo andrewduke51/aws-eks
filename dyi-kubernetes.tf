@@ -12,6 +12,7 @@ module "dyi_kube_ctrl" {
   instance_type               = "t2.small"
   user_data                   = local.ctrl_user_data
   subnet_id                   = module.vpc.subnet_internal
+  security_groups             = [aws_security_group.allow_nodes.id, aws_security_group.allow_tls.id]
 }
 # NODES
 locals {
@@ -27,4 +28,5 @@ module "dyi_kube_cluster" {
   ec2                         = 0
   user_data                   = local.nodes_user_data
   subnet_id                   = module.vpc.subnet_internal
+  security_groups             = [aws_security_group.allow_nodes.id, aws_security_group.allow_tls.id]
 }
