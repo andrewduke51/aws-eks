@@ -1,8 +1,8 @@
 version: 2.1
 jobs:
   deployment:
-    docker:
-      - image: python:3.11-rc
+    machine: true
+    resource_class: dukesofhazards/runner
     environment:
       - ANSIBLE_HOST_KEY_CHECKING: False
     working_directory: ~
