@@ -8,7 +8,7 @@ locals {
 module "dyi_kube_ctrl" {
   source                      = "./modules/ec2"
   tag_name                    = "dyi-kube"
-  ec2                         = 1
+  ec2                         = 0
   instance_type               = "t2.small"
   user_data                   = local.ctrl_user_data
   subnet_id                   = module.vpc.subnet_internal
