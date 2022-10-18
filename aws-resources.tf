@@ -27,7 +27,7 @@ resource "aws_s3_bucket" "general" {
   bucket = var.bucket_name
 }
 
-resource "aws_s3_bucket_server_side_encryption_configuration" "example" {
+resource "aws_s3_bucket_server_side_encryption_configuration" "bucket_encryption" {
   bucket = aws_s3_bucket.general.bucket
 
   rule {
