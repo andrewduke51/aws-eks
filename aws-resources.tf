@@ -11,6 +11,7 @@ module "vpc" {
   subnet_dmz      = var.subnet_dmz
   subnet_internal = var.subnet_internal
   subnet_vpc      = var.subnet_vpc
+  auto_assign_ip  = true
 }
 ## KMS ##
 resource "aws_kms_key" "general_bucket_key" {
